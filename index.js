@@ -32,6 +32,8 @@ console.log(updateUser);
 const users = ['Salman', 'Shahrukh', 'Qasim', 'Gulmehar']
 const userList = document.querySelector('.user-list');
 
+const newUsers = [...users, 'A Qadir', 'Asfahan'];
+
 users.map((user) => {
     console.log(user);    
 });
@@ -39,7 +41,7 @@ users.map((user) => {
 
 // Array map
 
-userList.innerHTML = users
+userList.innerHTML = newUsers
 .map((user) => `<li class="user-list">${user}</li>`)
 .join('');
 
