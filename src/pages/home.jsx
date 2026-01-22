@@ -2,12 +2,23 @@ import { useState } from "react";
 
 import Counter from "../components/Counter";
 import UserRow from "../components/UserRow";
-import usersData from "../data/usersData";
+import UsersData from "../data/usersData";
 import AddUserForm from "../components/AddUserForm";
 
 const Home = () => {
 
-    const [users, setUsers] = useState(usersData); 
+    const [users, setUsers] = useState(UsersData); 
+
+    const [editUser, setEditUser] = useState(null);
+
+    const updateUser = (updatedUser) => {
+        const updatedList = users.map(user => {
+            user.id === updatedUser.id ? updatedUser : user
+        })
+
+        setUsers(updatedList);
+        setEditUser(null);
+    }
 
     const addUser = (user) => {
         setUsers([...users, user]);
@@ -47,6 +58,7 @@ const Home = () => {
                         </div>
 
                         <div className="col-12 mt-5">
+                            <h1 className="text-primary fs-2 text-center fw-bold mb-3">Users Table</h1>
                             <table class="table table-dark table-striped m-0">
                                 <thead>
                                     <tr>
@@ -60,7 +72,7 @@ const Home = () => {
                                     {
                                         users.map((user, id) => {
                                             return (
-                                                <UserRow key={id} id={user.id} name={user.name} email={user.email} onDelete={deleteUser} />
+                                                <UserRow key={id} id={user.id} name={user.name} email={user.email} onDelete={deleteUser} onEdit={setEditUser}/>
                                             )
                                         })
                                     }
